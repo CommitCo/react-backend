@@ -10,11 +10,8 @@ function asureAuth(req, res, next) {
     try {
         const payload = jwt.decode(token)
         req.user = payload
-        console.log(payload)
         const {exp} = payload
         const currenData = new Date().getTime()
-        console.log(exp);
-        console.log(currenData);
 
         if (exp <= currenData) {
             res.status(400).send({msg:"el token ha expirado"})
