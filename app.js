@@ -5,28 +5,34 @@ const {API_VERSION} = require("./constants")
 
 const app = express()
 
-//implementar rutas
+//importar rutas
+const authRouter = require("./router/auth.router")
+const UserRouter = require("./router/user.router")
+const menuRouter = require("./router/menu.router")
+const CourseRouter = require("./router/course.router")
+const postRouter = require("./router/post.router")
+const newsletterRouter = require("./router/newsletter.router")
 
-const authRoutes = require("./router/auth.router")
-const userRoutes = require("./router/user.router")
 
 //configurar body parse
-
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-//configurar carpeta estatica
+//configuracion carpeta static
 
 app.use(express.static("uploads"))
 
-//configurar header http - cors
+// configura header - Http - CORS
 
 app.use(Cors())
 
-//configurar rutas
-
-app.use(`/api/${API_VERSION}`,authRoutes)
-app.use(`/api/${API_VERSION}`,userRoutes)
+// configura rutas
+app.use(`/api/${API_VERSION}`,authRouter)
+app.use(`/api/${API_VERSION}`,UserRouter)
+app.use(`/api/${API_VERSION}`,menuRouter)
+app.use(`/api/${API_VERSION}`,CourseRouter)
+app.use(`/api/${API_VERSION}`,postRouter)
+app.use(`/api/${API_VERSION}`,newsletterRouter)
 
 
 module.exports = app
